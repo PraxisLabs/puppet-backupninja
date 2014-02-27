@@ -77,6 +77,7 @@ define backupninja::duplicity( $order  = 90,
                                $destdir       = false,
                                $desthost      = false,
                                $destuser      = false,
+                               $desturl       = false,
                                # configs to backupninja client
                                $backupkeystore       = false,
                                $backupkeytype        = "rsa",
@@ -86,12 +87,15 @@ define backupninja::duplicity( $order  = 90,
                                $authorized_keys_file = false,
                                $installuser          = true,
                                $backuptag            = false,
+                               # s3 keys
+                               $awsaccesskeyid       = false,
+                               $awssecretaccesskey   = false,
                                # key options
                                $installkey           = true ) {
 
   # the client with configs for this machine
   include backupninja::client::defaults
-
+/*
   case $desthost { false: { err("need to define a destination host for remote backups!") } }
   case $destdir { false: { err("need to define a destination directory for remote backups!") } }
   case $password { false: { err("a password is necessary either to unlock the GPG key, or for symmetric encryption!") } }
@@ -118,7 +122,7 @@ define backupninja::duplicity( $order  = 90,
     keytype    => $backupkeytype,
     keystore   => $backupkeystore,
   }
-
+*/
   # the backupninja rule for this duplicity backup
   file { "${backupninja::client::defaults::configdir}/${order}_${name}.dup":
     ensure  => $ensure,
