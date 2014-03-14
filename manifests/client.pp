@@ -130,14 +130,14 @@ class backupninja::client::duplicity inherits backupninja::client::defaults {
       ensure => $duplicity_ensure_version,
     }
   }
-  // Dependencies not handled by the .deb
+  # Dependencies not handled by the .deb
   if !defined(Package['python-gobject-2']) {
-    package { 'python-gobject-2'
+    package { 'python-gobject-2':
       ensure => present,
     }
   }
   if !defined(Package['python-boto']) {
-    package { 'python-boto'
+    package { 'python-boto':
       ensure => present,
     }
   }
